@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.rewritedvisachecker.R.id.applicationNumber;
+
 public class MainActivity extends AppCompatActivity {
     private EditText et_appNum, et_appNumFak, et_type, et_year;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        et_appNum = findViewById(R.id.applicationNumber);
+        et_appNum = (EditText) findViewById(R.id.applicationNumber);
         et_appNumFak = findViewById(R.id.applicationNumberFake);
         et_type = findViewById(R.id.type);
         et_year = findViewById(R.id.year);
