@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.example.rewritedvisachecker.R.id.applicationNumber;
-
 public class MainActivity extends AppCompatActivity {
     private EditText et_appNum, et_appNumFak, et_type, et_year;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 visaStatus.add(html); //bad workaround
-                                final TextView textVisaStatus = findViewById(R.id.textView);
+                                final TextView textVisaStatus = findViewById(R.id.txt_result_visa);
                                 textVisaStatus.setText(visaStatus.get(0)); //bad workaround
                             }
                         });

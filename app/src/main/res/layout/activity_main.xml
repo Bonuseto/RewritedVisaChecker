@@ -1,111 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width='match_parent'
-    android:layout_height='match_parent'
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
+    android:padding="16dp"
     tools:context="com.example.rewritedvisachecker.MainActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Visa Application Data"
-        android:textSize="25dp"
+        android:layout_above="@+id/container_input_visa_data"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginBottom="25dp"
         android:shadowColor="@color/colorPrimaryDark"
         android:shadowDx="1"
         android:shadowDy="1"
-        android:shadowRadius="2"/>
+        android:shadowRadius="2"
+        android:text="@string/header_enter_data"
+        android:textSize="25sp" />
+
     <LinearLayout
+        android:id="@+id/container_input_visa_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_centerInParent="true"
         android:orientation="vertical">
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
+                android:id="@+id/applicationNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/applicationNumber"
-                android:hint="12345*"
-                android:inputType="number"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginTop="@dimen/edt_margin_top_input"
+                android:hint="@string/user_number"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
+
+            <EditText
+                android:id="@+id/applicationNumberFake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edt_margin_top_input"
+                android:hint="@string/user_number_fake"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edt_margin_top_input"
+                android:hint="@string/visa_type"
+                android:inputType="textCapCharacters" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/edt_margin_top_input"
+                android:hint="@string/visa_year"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/resultButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/applicationNumberFake"
-            android:hint="XX"
-            android:inputType="number"
-            android:layout_marginBottom="20dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/type"
-                android:hint="CC"
-                android:inputType="textCapCharacters"
-                android:layout_marginBottom="20dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/year"
-                android:hint="YYYY"
-                android:inputType="number"
-                android:layout_marginBottom="20dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/resultButton"
-                android:hint="Get Result"
-                android:layout_marginBottom="20dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:hint="Result will be shown here"
-                android:layout_marginBottom="20dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="15dp"
+            android:text="@string/get_data" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
+            android:id="@+id/txt_result_visa"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/edt_margin_top_input"
+            android:text="@string/result_status" />
 
-            <WebView
-                android:id="@+id/webview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:hint="Result will be shown here"
-                android:visibility="invisible" />
-        </com.google.android.material.textfield.TextInputLayout>
-</LinearLayout>
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_input_visa_data"
+        android:visibility="gone" />
 
 </RelativeLayout>
-</ScrollView>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RewritedVisaChecker</string>
+    <string name="header_enter_data">Enter Visa Application Data</string>
+    <string name="get_data">Get Result</string>
+    <string name="result_status">Result will be shown here</string>
+    <string name="user_number">12345*</string>
+    <string name="user_number_fake">XX</string>
+    <string name="visa_type">CC</string>
+    <string name="visa_year">YYYY</string>
 </resources>
