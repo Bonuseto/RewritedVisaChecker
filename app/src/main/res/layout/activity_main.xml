@@ -34,7 +34,6 @@
                 android:id="@+id/applicationNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edt_margin_top_input"
                 android:hint="@string/user_number"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -47,7 +46,6 @@
                 android:id="@+id/applicationNumberFake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edt_margin_top_input"
                 android:hint="@string/user_number_fake"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -56,11 +54,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <Spinner
                 android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edt_margin_top_input"
                 android:hint="@string/visa_type"
                 android:inputType="textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,11 +66,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <Spinner
                 android:id="@+id/year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edt_margin_top_input"
                 android:hint="@string/visa_year"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +85,6 @@
             android:id="@+id/txt_result_visa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/edt_margin_top_input"
             android:text="@string/result_status" />
 
     </LinearLayout>

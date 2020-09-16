@@ -10,25 +10,71 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText et_appNum, et_appNumFak, et_type, et_year;
+    private EditText et_appNum, et_appNumFak;
+    private Spinner sp_type;
     private static final String TAG = MainActivity.class.getSimpleName();
     private boolean flagOnlyFirstRequest = true;
     Button resultBtn;
+    String[] visa_types = {"DP","DV","PP","ZK","ZM","ST","TP","CD","VP","MK"};
+    String[] visa_years = {"2020","2019","2018"};
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         et_appNum = (EditText) findViewById(R.id.applicationNumber);
-        et_appNumFak = findViewById(R.id.applicationNumberFake);
-        et_type = findViewById(R.id.type);
-        et_year = findViewById(R.id.year);
+        et_appNumFak = (EditText) findViewById(R.id.applicationNumberFake);
+        final String[] string_type = new String[1];
+        final String[] string_year = new String[1];
+
+
+        class VisaTypesSpinnerClass implements AdapterView.OnItemSelectedListener
+        {
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id)
+            {
+                string_type[0] =  visa_types[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        }
+        class YearsSpinnerClass implements AdapterView.OnItemSelectedListener
+        {
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id)
+            {
+                string_year[0] =  visa_years[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        }
+
+        Spinner spin = (Spinner) findViewById(R.id.type);
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, visa_types);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
+        spin.setOnItemSelectedListener(new VisaTypesSpinnerClass());
+
+        Spinner spin2 = (Spinner) findViewById(R.id.year);
+        ArrayAdapter<String> aa2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, visa_years);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin2.setAdapter(aa2);
+        spin2.setOnItemSelectedListener(new YearsSpinnerClass());
+
+
 
         resultBtn = findViewById(R.id.resultButton);
         resultBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,14 +127,14 @@ public class MainActivity extends AppCompatActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    myWebview.loadUrl("javascript:document.getElementById('edit-ioff-application-code').value = '" + et_type.getText().toString() + "';void(0);");
+                                    myWebview.loadUrl("javascript:document.getElementById('edit-ioff-application-code').value = '" + string_type[0] + "';void(0);");
                                 }
                             }, 900);
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    myWebview.loadUrl("javascript:document.getElementById('edit-ioff-application-year').value = '" + et_year.getText().toString() + "';void(0);");
+                                    myWebview.loadUrl("javascript:document.getElementById('edit-ioff-application-year').value = '" + string_year[0] + "';void(0);");
                                 }
                             }, 1200);
 
