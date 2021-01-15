@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "725942157537",
+    "firebase_url": "https://visaczekerfirebase-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "visaczekerfirebase",
+    "storage_bucket": "visaczekerfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725942157537:android:e17d9b56753cd6db7af7a0",
+        "android_client_info": {
+          "package_name": "com.example.rewritedvisachecker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725942157537-bhudk1rvov1e3qpb9ajb6clgrq9qud75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7wE0_g7ueWe-OXHh8moB7E2rURh5E7XU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725942157537-bhudk1rvov1e3qpb9ajb6clgrq9qud75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725942157537:android:9de05f48d97b75b87af7a0",
+        "android_client_info": {
+          "package_name": "com.example.testfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725942157537-bhudk1rvov1e3qpb9ajb6clgrq9qud75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7wE0_g7ueWe-OXHh8moB7E2rURh5E7XU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725942157537-bhudk1rvov1e3qpb9ajb6clgrq9qud75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
