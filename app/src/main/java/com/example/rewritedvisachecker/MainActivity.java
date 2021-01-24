@@ -1,5 +1,6 @@
 package com.example.rewritedvisachecker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 UserHelper user = new UserHelper(appNum, appNumFak, type, year);
 
                 reference.child(appNum).setValue(user);
+                /////////////////itz cancer
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                startActivity(intent);
                 
             }
         });
