@@ -1,5 +1,6 @@
 package com.example.rewritedvisachecker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,31 +20,35 @@ import java.util.ArrayList;
 public class ListActivity extends AppCompatActivity {
 
     ListView listView;
-    FirebaseDatabase database;
     DatabaseReference ref;
     ArrayList<String> list;
     ArrayAdapter <String> adapter;
     UserHelper user;
+    Intent intent;
+    String appNum;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        intent = getIntent();
+        appNum = intent.getStringExtra("appNum");
+
         user = new UserHelper();
         listView = (ListView) findViewById(R.id.listView);
-        //database = FirebaseDatabase.getInstance();
 
         ref = FirebaseDatabase.getInstance().getReference();
-           //     = database.getReference("users");
         list = new ArrayList<>();
         adapter = new ArrayAdapter<String>(this, R.layout.user_info,R.id.userInfo, list);
-        ref.child("users").orderByChild("appNumFak").equalTo("14").addValueEventListener(new ValueEventListener() {
+        ref.child("users").orderByChild("appNum").equalTo(appNum).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren())
                 {
 
                     user = ds.getValue(UserHelper.class);
+                    list.add(user.getStatus());
                     list.add(user.getAppNum());
                 }
                 listView.setAdapter(adapter);

@@ -1,6 +1,7 @@
 package com.example.rewritedvisachecker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         resultBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
 
@@ -41,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 String appNumFak = et_appNumFak.getEditText().getText().toString();
                 String type = et_type.getEditText().getText().toString();
                 String year = et_year.getEditText().getText().toString();
+                String status = "Null";
 
-                UserHelper user = new UserHelper(appNum, appNumFak, type, year);
+                UserHelper user = new UserHelper(appNum, appNumFak, type, year, status);
 
                 reference.child(appNum).setValue(user);
-                /////////////////itz cancer
-                Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                startActivity(intent);
+                Intent myIntent = new Intent(MainActivity.this, ListActivity.class);
+                myIntent.putExtra("appNum", appNum);
+                MainActivity.this.startActivity(myIntent);
                 
             }
         });

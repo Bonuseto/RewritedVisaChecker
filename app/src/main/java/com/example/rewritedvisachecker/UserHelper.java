@@ -2,16 +2,17 @@ package com.example.rewritedvisachecker;
 
 public class UserHelper {
 
-    String appNum, appNumFak, type, year;
+    String appNum, appNumFak, type, year, status;
 
     public UserHelper() {
     }
 
-    public UserHelper(String appNum, String appNumFak, String type, String year) {
+    public UserHelper(String appNum, String appNumFak, String type, String year, String status) {
         this.appNum = appNum;
         this.appNumFak = appNumFak;
         this.type = type;
         this.year = year;
+        this.status = status;
     }
 
     public String getAppNum() {
@@ -44,5 +45,13 @@ public class UserHelper {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
