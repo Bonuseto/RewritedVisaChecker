@@ -1,6 +1,8 @@
 package com.example.rewritedvisachecker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,6 +28,8 @@ public class ListActivity extends AppCompatActivity {
     UserHelper user;
     Intent intent;
     String appNum;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

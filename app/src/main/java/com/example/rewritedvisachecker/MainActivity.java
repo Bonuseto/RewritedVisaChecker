@@ -1,10 +1,10 @@
 package com.example.rewritedvisachecker;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +21,27 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            //show sign up activity
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
+            Toast.makeText(MainActivity.this, "Run only once", Toast.LENGTH_LONG)
+                    .show();
+        }
+
+
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("isFirstRun", false).commit();
 
         et_appNum = findViewById(R.id.applicationNumber);
         et_appNumFak = findViewById(R.id.applicationNumberFake);
@@ -39,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
 
-                String appNum = et_appNum.getEditText().getText().toString();
-                String appNumFak = et_appNumFak.getEditText().getText().toString();
-                String type = et_type.getEditText().getText().toString();
-                String year = et_year.getEditText().getText().toString();
-                String status = "Null";
+                String appNum = getText(et_appNum);
+                String appNumFak = getText(et_appNumFak);
+                String type = getText(et_type);
+                String year = getText(et_year);
+                String status = "Default";
 
                 UserHelper user = new UserHelper(appNum, appNumFak, type, year, status);
 
@@ -51,8 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(MainActivity.this, ListActivity.class);
                 myIntent.putExtra("appNum", appNum);
                 MainActivity.this.startActivity(myIntent);
-                
+
             }
         });
+    }
+
+    private String getText(TextInputLayout layout) {
+        return layout.getEditText().getText().toString();
     }
 }

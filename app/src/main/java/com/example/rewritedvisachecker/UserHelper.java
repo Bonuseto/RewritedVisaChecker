@@ -1,8 +1,11 @@
 package com.example.rewritedvisachecker;
 
+import model.VisaStatus;
+
 public class UserHelper {
 
-    String appNum, appNumFak, type, year, status;
+    String appNum, appNumFak, type, year, visaStatus;
+   // private VisaStatus visaStatus;
 
     public UserHelper() {
     }
@@ -12,7 +15,7 @@ public class UserHelper {
         this.appNumFak = appNumFak;
         this.type = type;
         this.year = year;
-        this.status = status;
+        this.visaStatus = status;
     }
 
     public String getAppNum() {
@@ -48,10 +51,10 @@ public class UserHelper {
     }
 
     public String getStatus() {
-        return status;
+        return visaStatus;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.visaStatus = status;
     }
 }
