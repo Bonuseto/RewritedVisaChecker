@@ -4,18 +4,19 @@ import model.VisaStatus;
 
 public class UserHelper {
 
-    String appNum, appNumFak, type, year, visaStatus;
-   // private VisaStatus visaStatus;
+    String appNum, appNumFak, type, year, visaStatus, uniqueID;
+    // private VisaStatus visaStatus;
 
     public UserHelper() {
     }
 
-    public UserHelper(String appNum, String appNumFak, String type, String year, String status) {
+    public UserHelper(String appNum, String appNumFak, String type, String year, String status, String uniqueID) {
         this.appNum = appNum;
         this.appNumFak = appNumFak;
         this.type = type;
         this.year = year;
         this.visaStatus = status;
+        this.uniqueID = uniqueID;
     }
 
     public String getAppNum() {
@@ -57,4 +58,8 @@ public class UserHelper {
     public void setStatus(String status) {
         this.visaStatus = status;
     }
+
+    public String getUniqueID() { return uniqueID; }
+
+    public void setUniqueID(String uniqueID) { this.uniqueID = uniqueID; }
 }

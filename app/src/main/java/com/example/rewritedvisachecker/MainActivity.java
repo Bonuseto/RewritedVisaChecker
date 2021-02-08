@@ -1,10 +1,11 @@
 package com.example.rewritedvisachecker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,26 +25,28 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference reference;
 
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getBoolean("isFirstRun", true);
 
-        if (isFirstRun) {
-            //show sign up activity
-            startActivity(new Intent(MainActivity.this, MainActivity.class));
-            Toast.makeText(MainActivity.this, "Run only once", Toast.LENGTH_LONG)
-                    .show();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean idHasBeenGenerated = prefs.getBoolean("idgenerated", false);
+
+        if (!idHasBeenGenerated) {
+            String uuid = UUID.randomUUID().toString();
+
+//do your thing with PreferenceConnector
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("idgenerated", true);
+            editor.putString("uniqueId", uuid);
+            editor.commit();
+        } else {
+
+            //Do nothing ID has already been generated
         }
 
-
-        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).commit();
 
         et_appNum = findViewById(R.id.applicationNumber);
         et_appNumFak = findViewById(R.id.applicationNumberFake);
@@ -56,17 +61,23 @@ public class MainActivity extends AppCompatActivity {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
 
+                SharedPreferences settings = PreferenceManager
+                        .getDefaultSharedPreferences(MainActivity.this);
+                String uniqueId = settings.getString("uniqueId", "def");
+
+
                 String appNum = getText(et_appNum);
                 String appNumFak = getText(et_appNumFak);
                 String type = getText(et_type);
                 String year = getText(et_year);
-                String status = "Default";
+                String status = "NotSet";
 
-                UserHelper user = new UserHelper(appNum, appNumFak, type, year, status);
+
+                UserHelper user = new UserHelper(appNum, appNumFak, type, year, status, uniqueId);
 
                 reference.child(appNum).setValue(user);
                 Intent myIntent = new Intent(MainActivity.this, ListActivity.class);
-                myIntent.putExtra("appNum", appNum);
+                myIntent.putExtra("uniqueId", uniqueId);
                 MainActivity.this.startActivity(myIntent);
 
             }
@@ -76,4 +87,6 @@ public class MainActivity extends AppCompatActivity {
     private String getText(TextInputLayout layout) {
         return layout.getEditText().getText().toString();
     }
+
+
 }
