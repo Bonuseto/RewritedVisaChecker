@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
 
+    // u should use RecycleView
     ListView listView;
     DatabaseReference ref;
     ArrayList<String> list;

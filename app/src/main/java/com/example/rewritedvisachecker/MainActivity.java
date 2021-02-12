@@ -31,21 +31,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean idHasBeenGenerated = prefs.getBoolean("idgenerated", false);
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean idHasBeenGenerated = App.preferenceManager.getIdGenerator();
 
         if (!idHasBeenGenerated) {
-            String uuid = UUID.randomUUID().toString();
+/*            String uuid = UUID.randomUUID().toString();
 
 //do your thing with PreferenceConnector
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("idgenerated", true);
             editor.putString("uniqueId", uuid);
-            editor.commit();
+            editor.commit();*/
+            App.preferenceManager.setIdU();
         } else {
 
             //Do nothing ID has already been generated
         }
+
+
 
 
         et_appNum = findViewById(R.id.applicationNumber);
@@ -61,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
 
-                SharedPreferences settings = PreferenceManager
+          /*      SharedPreferences settings = PreferenceManager
                         .getDefaultSharedPreferences(MainActivity.this);
-                String uniqueId = settings.getString("uniqueId", "def");
+                String uniqueId = settings.getString("uniqueId", "def");*/
 
+                String uniqueId= App.preferenceManager.getIdU();
 
                 String appNum = getText(et_appNum);
                 String appNumFak = getText(et_appNumFak);
