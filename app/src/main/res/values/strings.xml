@@ -8,4 +8,5 @@
     <string name="visa_type">CC</string>
     <string name="visa_year">YYYY</string>
     <string name="submit">dodi</string>
+    <string name="contentDescriptionFloatingButton">TODO</string>
 </resources>

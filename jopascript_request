@@ -1,5 +1,0 @@
-javascript:document.getElementById('edit-ioff-application-number').value = '34456';
-document.getElementById('edit-ioff-application-number-fake').value = '2';
-document.getElementById('edit-ioff-application-code').value = 'ZM';
-document.getElementById('edit-ioff-application-year').value = '2019';
-document.getElementById('edit-submit-button').click();

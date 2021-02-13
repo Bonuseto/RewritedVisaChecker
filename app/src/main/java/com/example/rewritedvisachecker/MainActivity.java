@@ -1,28 +1,32 @@
 package com.example.rewritedvisachecker;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextInputLayout et_appNum, et_appNumFak, et_type, et_year;
-    Button resultBtn;
-
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    // u should use RecycleView
+    ListView listView;
+    DatabaseReference ref;
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+    UserHelper user;
+    String uniqueId;
 
 
     @Override
@@ -31,66 +35,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         boolean idHasBeenGenerated = App.preferenceManager.getIdGenerator();
 
         if (!idHasBeenGenerated) {
-/*            String uuid = UUID.randomUUID().toString();
-
-//do your thing with PreferenceConnector
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("idgenerated", true);
-            editor.putString("uniqueId", uuid);
-            editor.commit();*/
+            //ran only on first launch
+            startActivity(new Intent(MainActivity.this, VisaDetailsActivity.class));
             App.preferenceManager.setIdU();
-        } else {
-
-            //Do nothing ID has already been generated
         }
 
+        uniqueId = App.preferenceManager.getIdU();
 
+        user = new UserHelper();
+        listView = findViewById(R.id.listView);
 
-
-        et_appNum = findViewById(R.id.applicationNumber);
-        et_appNumFak = findViewById(R.id.applicationNumberFake);
-        et_type = findViewById(R.id.type);
-        et_year = findViewById(R.id.year);
-
-        resultBtn = findViewById(R.id.resultButton);
-        resultBtn.setOnClickListener(new View.OnClickListener() {
+        ref = FirebaseDatabase.getInstance().getReference();
+        list = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, R.layout.user_info, R.id.userInfo, list);
+        ref.child("users").orderByChild("uniqueID").equalTo(uniqueId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
 
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("users");
+                    user = ds.getValue(UserHelper.class);
+                    list.add(user.getAppNum());
+                    list.add(user.getStatus());
+                }
+                listView.setAdapter(adapter);
 
-          /*      SharedPreferences settings = PreferenceManager
-                        .getDefaultSharedPreferences(MainActivity.this);
-                String uniqueId = settings.getString("uniqueId", "def");*/
+            }
 
-                String uniqueId= App.preferenceManager.getIdU();
-
-                String appNum = getText(et_appNum);
-                String appNumFak = getText(et_appNumFak);
-                String type = getText(et_type);
-                String year = getText(et_year);
-                String status = "NotSet";
-
-
-                UserHelper user = new UserHelper(appNum, appNumFak, type, year, status, uniqueId);
-
-                reference.child(appNum).setValue(user);
-                Intent myIntent = new Intent(MainActivity.this, ListActivity.class);
-                myIntent.putExtra("uniqueId", uniqueId);
-                MainActivity.this.startActivity(myIntent);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
     }
 
-    private String getText(TextInputLayout layout) {
-        return layout.getEditText().getText().toString();
+    public void sendMessage(View view) {
+        Intent intent = new Intent(MainActivity.this, VisaDetailsActivity.class);
+        startActivity(intent);
     }
-
-
 }
