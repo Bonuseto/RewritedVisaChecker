@@ -18,13 +18,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import model.CustomAdapter;
+import model.DataModel;
+
 public class MainActivity extends AppCompatActivity {
 
     // u should use RecycleView
     ListView listView;
     DatabaseReference ref;
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
+    ArrayList<DataModel> dataModels;
+    CustomAdapter adapter;
     UserHelper user;
     String uniqueId;
 
@@ -49,16 +52,17 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
 
         ref = FirebaseDatabase.getInstance().getReference();
-        list = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, R.layout.user_info, R.id.userInfo, list);
+        dataModels = new ArrayList<>();
+        adapter = new CustomAdapter(dataModels, getApplicationContext());
         ref.child("users").orderByChild("uniqueID").equalTo(uniqueId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
 
                     user = ds.getValue(UserHelper.class);
-                    list.add(user.getAppNum());
-                    list.add(user.getStatus());
+                   // list.add(user.getAppNum());
+                    dataModels.add(new DataModel(user.getAppNum(), user.getStatus()));
+                   // list.add(user.getStatus());
                 }
                 listView.setAdapter(adapter);
 
