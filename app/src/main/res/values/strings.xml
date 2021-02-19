@@ -9,4 +9,5 @@
     <string name="visa_year">YYYY</string>
     <string name="submit">dodi</string>
     <string name="contentDescriptionFloatingButton">TODO</string>
+    <string name="default_text">default_text</string>
 </resources>

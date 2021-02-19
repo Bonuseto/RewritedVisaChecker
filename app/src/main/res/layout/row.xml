@@ -2,23 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/application_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Header"
         android:padding="24dp"
-        android:textColor="#FFFFFF"/>
+        android:text="@string/default_text"
+        android:textColor="#FFFFFF" />
 
     <TextView
+        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/status"
-        android:text="awd"
         android:padding="24dp"
-        android:textColor="#FFFFFF"/>
-
+        android:text="@string/default_text"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

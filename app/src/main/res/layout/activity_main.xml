@@ -6,24 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.example.rewritedvisachecker.MainActivity">
 
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/imgFour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/contentDescriptionFloatingButton"
+        android:onClick="sendMessage"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-        app:tint="@android:color/white"
-        android:onClick="sendMessage"
         app:srcCompat="@drawable/ic_baseline_add_24"
-        android:contentDescription="@string/contentDescriptionFloatingButton" />
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

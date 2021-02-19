@@ -1,11 +1,8 @@
 package com.example.rewritedvisachecker;
 
-import model.VisaStatus;
-
 public class UserHelper {
 
     String appNum, appNumFak, type, year, visaStatus, uniqueID;
-    // private VisaStatus visaStatus;
 
     public UserHelper() {
     }
@@ -59,7 +56,11 @@ public class UserHelper {
         this.visaStatus = status;
     }
 
-    public String getUniqueID() { return uniqueID; }
+    public String getUniqueID() {
+        return uniqueID;
+    }
 
-    public void setUniqueID(String uniqueID) { this.uniqueID = uniqueID; }
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
+    }
 }
