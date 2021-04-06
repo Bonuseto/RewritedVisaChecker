@@ -8,9 +8,9 @@ import java.util.UUID;
 public class PreferenceManager {
 
 
-    private SharedPreferences prefs;
+    private final SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    private Context context;
+    private final Context context;
 
     public PreferenceManager(Context context) {
         this.context = context;
@@ -39,7 +39,7 @@ public class PreferenceManager {
 
         context.getSharedPreferences(
                 "com.example.myprofile", Context.MODE_PRIVATE);
-        return prefs.getBoolean ("idgenerated", false);
+        return prefs.getBoolean("idgenerated", false);
     }
 
 }

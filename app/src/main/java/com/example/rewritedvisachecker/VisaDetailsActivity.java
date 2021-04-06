@@ -12,8 +12,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.UUID;
-
 public class VisaDetailsActivity extends AppCompatActivity {
 
     TextInputLayout et_appNum, et_appNumFak, et_type, et_year;
@@ -21,7 +19,6 @@ public class VisaDetailsActivity extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,13 +51,9 @@ public class VisaDetailsActivity extends AppCompatActivity {
 
                 appNum = appNum.replaceFirst("^0+(?!$)", "");
 
-
                 UserHelper user = new UserHelper(appNum, appNumFak, type, year, status, uniqueId, firstTimeAdded, finalStatus);
 
-                UUID uniqueKey = UUID.randomUUID();
-
-               // reference.child(String.valueOf( appNum + " - " + uniqueKey)).setValue(user);
-                reference.child(String.valueOf( uniqueId + " - " + appNum )).setValue(user);
+                reference.child(String.valueOf(uniqueId + " - " + appNum)).setValue(user);
                 Intent myIntent = new Intent(VisaDetailsActivity.this, MainActivity.class);
                 myIntent.putExtra("uniqueId", uniqueId);
                 VisaDetailsActivity.this.startActivity(myIntent);

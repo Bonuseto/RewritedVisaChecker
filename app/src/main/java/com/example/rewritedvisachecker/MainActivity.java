@@ -3,8 +3,6 @@ package com.example.rewritedvisachecker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,18 +18,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import model.CustomAdapter;
 import model.DataModel;
 import model.RecyclerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    //ListView listView;
-   RecyclerView recyclerView;
+    RecyclerView recyclerView;
     DatabaseReference ref;
     ArrayList<DataModel> dataModels;
-    //CustomAdapter adapter;
     RecyclerAdapter adapter;
     UserHelper user;
     String uniqueId;
@@ -54,12 +48,10 @@ public class MainActivity extends AppCompatActivity {
         uniqueId = App.preferenceManager.getIdU();
 
         user = new UserHelper();
-        //listView = findViewById(R.id.robot);
-        recyclerView = findViewById(R.id.robot);
+        recyclerView = findViewById(R.id.recycleview);
 
         ref = FirebaseDatabase.getInstance().getReference();
         dataModels = new ArrayList<>();
-        //adapter = new CustomAdapter(dataModels, getApplicationContext());
         adapter = new RecyclerAdapter(dataModels, getApplicationContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,18 +60,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataModels.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
-
-
                     user = ds.getValue(UserHelper.class);
-                    // list.add(user.getAppNum());
                     dataModels.add(new DataModel(user.getAppNum(), user.getStatus()));
-                    // list.add(user.getStatus());
                 }
-                //listView.setAdapter(adapter);
-               // recyclerView.setAdapter(adapter);
-
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override

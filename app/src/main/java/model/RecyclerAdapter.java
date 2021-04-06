@@ -19,7 +19,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Contac
     private ArrayList<DataModel> dataSet;
     private Context mContext;
 
-    // Counstructor for the Class
+    // Constructor for the Class
     public RecyclerAdapter(ArrayList<DataModel> contactsList, Context context) {
         this.dataSet = contactsList;
         this.mContext = context;
@@ -38,7 +38,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Contac
 
     @Override
     public int getItemCount() {
-        return dataSet == null? 0: dataSet.size();
+        return dataSet == null ? 0 : dataSet.size();
     }
 
     // This method is called when binding the data to the views being created in RecyclerView
@@ -58,22 +58,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Contac
     // This is your ViewHolder class that helps to populate data to the view
     public class ContactHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtName;
-        private TextView txtNumber;
+        private TextView txtAppNum;
+        private TextView txtStatus;
 
         public ContactHolder(View itemView) {
             super(itemView);
 
-            txtName = itemView.findViewById(R.id.application_number);
-            txtNumber = itemView.findViewById(R.id.status);
+            txtAppNum = itemView.findViewById(R.id.application_number);
+            txtStatus = itemView.findViewById(R.id.status);
         }
 
         public void setContactName(String name) {
-            txtName.setText(name);
+            txtAppNum.setText(name);
         }
 
         public void setContactNumber(String number) {
-            txtNumber.setText(number);
+            txtStatus.setText(number);
         }
     }
 
