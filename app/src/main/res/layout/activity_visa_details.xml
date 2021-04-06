@@ -30,12 +30,13 @@
             android:id="@+id/applicationNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_number">
+            android:hint="@string/user_number"
+            android:inputType ="phone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,12 +44,13 @@
             android:id="@+id/applicationNumberFake"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_number_fake">
+            android:hint="@string/user_number_fake"
+            android:inputType = "phone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="phone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,12 +71,13 @@
             android:id="@+id/year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/visa_year">
+            android:hint="@string/visa_year"
+            android:inputType="phone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
