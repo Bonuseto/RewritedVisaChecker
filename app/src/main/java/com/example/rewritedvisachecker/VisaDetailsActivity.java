@@ -31,6 +31,7 @@ public class VisaDetailsActivity extends AppCompatActivity {
         et_year = findViewById(R.id.year);
 
         resultBtn = findViewById(R.id.resultButton);
+        //adding new visa application in firebase database
         resultBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +49,6 @@ public class VisaDetailsActivity extends AppCompatActivity {
                 String firstTimeAdded = "true";
                 String finalStatus = "false";
 
-
                 appNum = appNum.replaceFirst("^0+(?!$)", "");
 
                 UserHelper user = new UserHelper(appNum, appNumFak, type, year, status, uniqueId, firstTimeAdded, finalStatus);
@@ -57,7 +57,6 @@ public class VisaDetailsActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(VisaDetailsActivity.this, MainActivity.class);
                 myIntent.putExtra("uniqueId", uniqueId);
                 VisaDetailsActivity.this.startActivity(myIntent);
-
             }
         });
     }

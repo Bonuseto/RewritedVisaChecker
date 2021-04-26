@@ -30,31 +30,29 @@ public class MainActivity extends AppCompatActivity {
     UserHelper user;
     String uniqueId;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean idGenerated = App.preferenceManager.getIdGenerator();
 
-
-        boolean idHasBeenGenerated = App.preferenceManager.getIdGenerator();
-
-        if (!idHasBeenGenerated) {
+        //if application opened for a first time open VisaDetailsActivity
+        if (!idGenerated) {
             //ran only on first launch
             startActivity(new Intent(MainActivity.this, VisaDetailsActivity.class));
             App.preferenceManager.setIdU();
         }
 
+        //show MainActivity with list of visa applications
         uniqueId = App.preferenceManager.getIdU();
-
         user = new UserHelper();
         recyclerView = findViewById(R.id.recycleview);
-
         ref = FirebaseDatabase.getInstance().getReference();
         dataModels = new ArrayList<>();
         adapter = new RecyclerAdapter(dataModels, getApplicationContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //show visa applications with uniqueID related to device they are created on
         ref.child("users").orderByChild("uniqueID").equalTo(uniqueId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

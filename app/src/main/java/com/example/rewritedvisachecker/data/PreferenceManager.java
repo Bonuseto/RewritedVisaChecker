@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public class PreferenceManager {
 
-
     private final SharedPreferences prefs;
     private SharedPreferences.Editor editor;
     private final Context context;
@@ -17,7 +16,6 @@ public class PreferenceManager {
         prefs = context.getSharedPreferences("com.example.myprofile", Context.MODE_PRIVATE);
 
     }
-
 
     public void setIdU() {
         String uuid = UUID.randomUUID().toString();
@@ -29,14 +27,12 @@ public class PreferenceManager {
     }
 
     public String getIdU() {
-
         context.getSharedPreferences(
                 "com.example.myprofile", Context.MODE_PRIVATE);
         return prefs.getString("uniqueId", "");
     }
 
     public boolean getIdGenerator() {
-
         context.getSharedPreferences(
                 "com.example.myprofile", Context.MODE_PRIVATE);
         return prefs.getBoolean("idgenerated", false);
