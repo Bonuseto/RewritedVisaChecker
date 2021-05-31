@@ -10,4 +10,23 @@
     <string name="submit">dodi</string>
     <string name="contentDescriptionFloatingButton">TODO</string>
     <string name="default_text">default_text</string>
+
+    <string-array name="application_type">
+        <item>DP</item>
+        <item>DV</item>
+        <item>PP</item>
+        <item>ZK</item>
+        <item>ZM</item>
+        <item>ST</item>
+        <item>TP</item>
+        <item>CD</item>
+        <item>VP</item>
+        <item>MK</item>
+    </string-array>
+
+    <string-array name="application_year">
+        <item>2021</item>
+        <item>2020</item>
+        <item>2019</item>
+    </string-array>
 </resources>

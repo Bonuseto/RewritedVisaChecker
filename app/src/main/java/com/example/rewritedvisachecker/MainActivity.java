@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,11 +25,13 @@ import model.RecyclerAdapter;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    DatabaseReference ref;
+
     ArrayList<DataModel> dataModels;
     RecyclerAdapter adapter;
     UserHelper user;
     String uniqueId;
+    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+    DatabaseReference reference = rootNode.getReference("users");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,18 +45,32 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, VisaDetailsActivity.class));
             App.preferenceManager.setIdU();
         }
+        //swipe item left for delete
+        ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                reference.child(String.valueOf(uniqueId + " - " + user.appNum)).removeValue();
+                dataModels.remove(viewHolder.getAdapterPosition());
+                adapter.notifyDataSetChanged();
+            }
+        };
 
         //show MainActivity with list of visa applications
         uniqueId = App.preferenceManager.getIdU();
         user = new UserHelper();
         recyclerView = findViewById(R.id.recycleview);
-        ref = FirebaseDatabase.getInstance().getReference();
         dataModels = new ArrayList<>();
         adapter = new RecyclerAdapter(dataModels, getApplicationContext());
+        new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //show visa applications with uniqueID related to device they are created on
-        ref.child("users").orderByChild("uniqueID").equalTo(uniqueId).addValueEventListener(new ValueEventListener() {
+        reference.orderByChild("uniqueID").equalTo(uniqueId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataModels.clear();

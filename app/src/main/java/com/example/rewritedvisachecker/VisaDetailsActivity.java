@@ -3,6 +3,8 @@ package com.example.rewritedvisachecker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -14,7 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class VisaDetailsActivity extends AppCompatActivity {
 
-    TextInputLayout et_appNum, et_appNumFak, et_type, et_year;
+    TextInputLayout et_appNum, et_appNumFak;
+    AutoCompleteTextView et_type;
+    AutoCompleteTextView et_year;
     Button resultBtn;
 
     FirebaseDatabase rootNode;
@@ -31,7 +35,18 @@ public class VisaDetailsActivity extends AppCompatActivity {
         et_year = findViewById(R.id.year);
 
         resultBtn = findViewById(R.id.resultButton);
-        //adding new visa application in firebase database
+
+        String[] arrayType = getResources().getStringArray(R.array.application_type);
+
+        ArrayAdapter<String> adapterType = new ArrayAdapter<>(this, R.layout.list_item, arrayType);
+        et_type.setAdapter(adapterType);
+
+        String[] arrayYear = getResources().getStringArray(R.array.application_year);
+
+        ArrayAdapter<String> adapterYear = new ArrayAdapter<>(this, R.layout.list_item, arrayYear);
+        et_year.setAdapter(adapterYear);
+
+
         resultBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,8 +58,8 @@ public class VisaDetailsActivity extends AppCompatActivity {
 
                 String appNum = getText(et_appNum);
                 String appNumFak = getText(et_appNumFak);
-                String type = getText(et_type);
-                String year = getText(et_year);
+                String type = et_type.getText().toString();
+                String year = et_year.getText().toString();
                 String status = "NotSet";
                 String firstTimeAdded = "true";
                 String finalStatus = "false";
