@@ -1,80 +1,59 @@
-package model;
+package model
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.rewritedvisachecker.R
+import model.RecyclerAdapter.ContactHolder
+import java.util.*
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.rewritedvisachecker.R;
-
-import java.util.ArrayList;
-
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ContactHolder> {
-
-    // List to store all the contact details
-    private ArrayList<DataModel> dataSet;
-    private Context mContext;
-
-    // Constructor for the Class
-    public RecyclerAdapter(ArrayList<DataModel> contactsList, Context context) {
-        this.dataSet = contactsList;
-        this.mContext = context;
-    }
-
+class RecyclerAdapter     // Constructor for the Class
+(// List to store all the contact details
+        private val dataSet: ArrayList<DataModel>?, private val mContext: Context) : RecyclerView.Adapter<ContactHolder>() {
     // This method creates views for the RecyclerView by inflating the layout
     // Into the viewHolders which helps to display the items in the RecyclerView
-    @Override
-    public ContactHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
 
         // Inflate the layout view you have created for the list rows here
-        View view = layoutInflater.inflate(R.layout.row, parent, false);
-        return new ContactHolder(view);
+        val view = layoutInflater.inflate(R.layout.row, parent, false)
+        return ContactHolder(view)
     }
 
-    @Override
-    public int getItemCount() {
-        return dataSet == null ? 0 : dataSet.size();
+    override fun getItemCount(): Int {
+        return dataSet?.size ?: 0
     }
 
     // This method is called when binding the data to the views being created in RecyclerView
-    @Override
-    public void onBindViewHolder(@NonNull ContactHolder holder, final int position) {
-        final DataModel contact = dataSet.get(position);
+    override fun onBindViewHolder(holder: ContactHolder, position: Int) {
+        val contact = dataSet!![position]
 
         // Set the data to the views here
-        holder.setContactName(contact.getApplicationNumber());
-        holder.setContactNumber(contact.getStatus());
+        holder.setContactName(contact.applicationNumber)
+        holder.setContactNumber(contact.status)
 
         // You can set click listners to indvidual items in the viewholder here
         // make sure you pass down the listner or make the Data members of the viewHolder public
-
     }
 
     // This is your ViewHolder class that helps to populate data to the view
-    public class ContactHolder extends RecyclerView.ViewHolder {
-
-        private TextView txtAppNum;
-        private TextView txtStatus;
-
-        public ContactHolder(View itemView) {
-            super(itemView);
-
-            txtAppNum = itemView.findViewById(R.id.application_number);
-            txtStatus = itemView.findViewById(R.id.status);
+    inner class ContactHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val txtAppNum: TextView
+        private val txtStatus: TextView
+        fun setContactName(name: String?) {
+            txtAppNum.text = name
         }
 
-        public void setContactName(String name) {
-            txtAppNum.setText(name);
+        fun setContactNumber(number: String?) {
+            txtStatus.text = number
         }
 
-        public void setContactNumber(String number) {
-            txtStatus.setText(number);
+        init {
+            txtAppNum = itemView.findViewById(R.id.application_number)
+            txtStatus = itemView.findViewById(R.id.status)
         }
     }
-
 }

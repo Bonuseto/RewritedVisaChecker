@@ -1,17 +1,16 @@
-package com.example.rewritedvisachecker;
+package com.example.rewritedvisachecker
 
-import android.app.Application;
+import android.app.Application
+import com.example.rewritedvisachecker.data.PreferenceManager
 
-import com.example.rewritedvisachecker.data.PreferenceManager;
-
-public class App extends Application {
-
-    public static PreferenceManager preferenceManager;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        preferenceManager = new PreferenceManager(this);
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        preferenceManager = PreferenceManager(this)
     }
 
+    companion object {
+        @JvmField
+        var preferenceManager: PreferenceManager? = null
+    }
 }
